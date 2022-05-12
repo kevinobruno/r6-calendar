@@ -79,3 +79,4 @@ app/grpc/js/*.js
 .vscode
 
 google_credentials.json
+.env-development

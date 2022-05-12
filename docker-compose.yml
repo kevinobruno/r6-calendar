@@ -4,6 +4,7 @@ services:
   r6-calendar:
     build: .
     command: python app/main.py
+    env_file: .env-development
     environment:
       - PYTHONPATH=/app
     volumes:
