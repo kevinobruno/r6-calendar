@@ -1,0 +1,10 @@
+---
+version: '3.6'
+services:
+  r6-calendar:
+    build: .
+    command: python app/main.py
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
