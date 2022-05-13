@@ -1,5 +1,6 @@
 from app.modules.event.commands.create import CreateEventCommand
 from app.modules.event.commands.find import FindEventCommand
+from app.modules.event.commands.update import UpdateEventCommand
 from app.modules.match.commands.list.br import ListBRMatches
 from app.modules.match.commands.list.mundial import ListMundialMatches
 
@@ -15,8 +16,9 @@ for match in matches:
     event = FindEventCommand(match=match).execute()
 
     if event:
-        print(f'Match {match.id} event already created, skipping...')
+        print(f'Match {match.summary} event already created, updating if needed...')
+        UpdateEventCommand(match=match, event_id=event['event_id']).execute()
         continue
 
-    print(f'Creating event for match {match.id} ...')
+    print(f'Creating event for match {match.summary} ...')
     CreateEventCommand(match=match).execute()

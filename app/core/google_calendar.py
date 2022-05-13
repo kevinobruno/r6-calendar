@@ -28,7 +28,7 @@ class GoogleCalendar:
 
         event = {
             'summary': match.summary,
-            'description': None,
+            'description': match.championship.name,
             'start': {
                 'dateTime': f'{match.start.strftime("%Y-%m-%dT%H:%M:%S")}{self.DEAFULT_TZ_INFO}',
                 'timeZone': self.DEFAULT_TIMEZONE,
@@ -40,3 +40,16 @@ class GoogleCalendar:
         }
 
         return self.service.events().insert(calendarId=calendar_id, body=event).execute()
+
+    def update_event(self, match, event_id):
+        calendar_id = self.CALENDARS[match.championship.region]
+
+        event = self.service.events().get(calendarId=calendar_id, eventId=event_id).execute()
+
+        if event['summary'] != match.summary:
+            event['summary'] = match.summary
+            self.service.events().update(
+                calendarId=calendar_id,
+                eventId=event['id'],
+                body=event,
+            ).execute()

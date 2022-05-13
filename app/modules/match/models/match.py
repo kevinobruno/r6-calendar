@@ -22,5 +22,8 @@ class Match(BaseModel):
 
         self.summary = f'{self.team1.name} vs {self.team2.name}'
 
+        if self.team1.score != 0 or self.team2.score != 0:
+            self.summary = f'{self.team1.name} ({self.team1.score}) vs ({self.team2.score}) {self.team2.name}'
+
     def __str__(self):
         return f'{self.championship.name} | {self.start} | {self.team1.name} vs {self.team2.name}'

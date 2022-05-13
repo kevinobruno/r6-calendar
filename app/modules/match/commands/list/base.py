@@ -53,9 +53,9 @@ class BaseListMatchesCommand:
             self._map_championship(championship)
 
             # Ignore matches in the past
-            timestamp = int(r['date']['timestamp'])
-            if timestamp < datetime.now().timestamp():
-                continue
+            # timestamp = int(r['date']['timestamp'])
+            # if timestamp < datetime.now().timestamp():
+            #     continue
 
             # Ignore not wanted championship
             if championship.id not in self.CHAMPIONSHIP_ID_LIST[self.CHAMPIONSHIP_REGION]:
