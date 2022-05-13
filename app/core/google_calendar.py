@@ -19,7 +19,7 @@ class GoogleCalendar:
     DEAFULT_TZ_INFO = '-03:00'
 
     def __init__(self):
-        credentials_info = json.load(os.environ['GOOGLE_CREDENTIALS'])
+        credentials_info = json.loads(os.environ['GOOGLE_CREDENTIALS'])
         credentials = service_account.Credentials.from_service_account_info(credentials_info)
         self.service = build('calendar', 'v3', credentials=credentials)
 
