@@ -1,4 +1,5 @@
 from app.modules.event.commands.create import CreateEventCommand
+from app.modules.event.commands.flush import FlushEventsCommand
 from app.modules.event.commands.find import FindEventCommand
 from app.modules.event.commands.update import UpdateEventCommand
 from app.modules.match.commands.list.br import ListBRMatches
@@ -11,6 +12,9 @@ matches.extend(ListBRMatches().execute())
 matches.extend(ListMundialMatches().execute())
 
 print(f'{len(matches)} matches found')
+
+# print('Flushing events...')
+# FlushEventsCommand(championship_id=25).execute()
 
 for match in matches:
     event = FindEventCommand(match=match).execute()

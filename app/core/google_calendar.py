@@ -46,10 +46,17 @@ class GoogleCalendar:
 
         event = self.service.events().get(calendarId=calendar_id, eventId=event_id).execute()
 
-        if event['summary'] != match.summary:
-            event['summary'] = match.summary
-            self.service.events().update(
-                calendarId=calendar_id,
-                eventId=event['id'],
-                body=event,
-            ).execute()
+        event['summary'] = match.summary
+        event['description'] = match.championship.name
+        event['start']['dateTime'] = f'{match.start.strftime("%Y-%m-%dT%H:%M:%S")}{self.DEAFULT_TZ_INFO}'
+        event['end']['dateTime'] = f'{match.end.strftime("%Y-%m-%dT%H:%M:%S")}{self.DEAFULT_TZ_INFO}'
+
+        self.service.events().update(
+            calendarId=calendar_id,
+            eventId=event['id'],
+            body=event,
+        ).execute()
+
+    def delete_event(self, championship_region, event_id):
+        calendar_id = self.CALENDARS[championship_region]
+        self.service.events().delete(calendarId=calendar_id, eventId=event_id).execute()
