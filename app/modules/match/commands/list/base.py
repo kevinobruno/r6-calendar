@@ -13,18 +13,26 @@ class BaseListMatchesCommand:
 
     CHAMPIONSHIP_ID_LIST = {
         'ASIA': [
+            22,  # Asia-Pacific League - South Division
+            23,  # Asia-Pacific League - North Division
             24,  # Asia-Pacific League - Playoffs
         ],
         'BR': [
+            1,   # Campeonato Brasileiro
             9,   # Circuito Feminino de Rainbow Six
             11,  # Copa do Brasil
         ],
         'LATAM': [
             3,   # Copa da América do Sul
+            5,   # Campeonato Mexicano
             8,   # Copa Elite Six da América
+            17,  # Campeonato Sulamericano
         ],
         'EU': [
             19,  # Liga Européia
+        ],
+        'NA': [
+            20,  # Liga Americana
         ],
         'GLOBAL': [
             25,  # Six Major Charlotte
