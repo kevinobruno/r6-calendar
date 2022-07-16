@@ -48,7 +48,7 @@ class BaseListMatchesCommand:
 
         data = json.loads(soup.find(id='__NEXT_DATA__').text)
 
-        results = data['props']['pageProps']['matches']
+        results = data['props']['pageProps']['page']['matches']
         matches = []
 
         for r in results:

@@ -9,10 +9,10 @@ class GoogleCalendar:
 
     CALENDARS = {
         'ASIA': '',
-        'BR': 'e2njd3v1ib1m7vu1cehrhh9rb4@group.calendar.google.com',
+        'BR': os.environ['BR_CALENDAR_ID'],
         'LATAM': '',
         'EU': '',
-        'GLOBAL': 'oemr33rodalfi44e04mrtamnac@group.calendar.google.com',
+        'GLOBAL': os.environ['GLOBAL_CALENDAR_ID'],
     }
 
     DEFAULT_TIMEZONE = 'America/Sao_Paulo'
