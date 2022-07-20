@@ -6,6 +6,8 @@ from app.core.model import BaseModel
 
 class Match(BaseModel):
 
+    COLLECTION = 'matches'
+
     DEFAULT_MATCH_DURATION = 60  # minutes
     DEFAULT_TZ_INFO = '-0300'
 

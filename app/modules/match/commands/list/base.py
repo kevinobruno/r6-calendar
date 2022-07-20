@@ -1,9 +1,9 @@
-from datetime import datetime
 import json
 
 from bs4 import BeautifulSoup
 import requests
 
+from app.core.firestore import db
 from app.modules.match.models.championship import Championship
 from app.modules.match.models.match import Match
 from app.modules.match.models.team import Team
@@ -60,11 +60,6 @@ class BaseListMatchesCommand:
 
             self._map_championship(championship)
 
-            # Ignore matches in the past
-            # timestamp = int(r['date']['timestamp'])
-            # if timestamp < datetime.now().timestamp():
-            #     continue
-
             # Ignore not wanted championship
             if championship.id not in self.CHAMPIONSHIP_ID_LIST[self.CHAMPIONSHIP_REGION]:
                 continue
@@ -90,13 +85,11 @@ class BaseListMatchesCommand:
         return matches
 
     def _map_championship(self, championship):
-        file = open('mapped_championships.json')
-        mapped_championships = json.load(file)
+        document = db.collection(Championship.COLLECTION).document(str(championship.id)).get()
 
-        if not mapped_championships.get(str(championship.id)):
-            file = open('mapped_championships.json', 'w')
-            mapped_championships[championship.id] = championship.name
-            json.dump(mapped_championships, file)
+        if not document.exists:
+            data = {'name': championship.name}
+            db.collection(Championship.COLLECTION).document(str(championship.id)).set(data)
 
             # TODO: Notify somewhere else like email
             print(f'New championship mapped {championship.id} - {championship.name}')

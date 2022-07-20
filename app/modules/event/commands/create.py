@@ -1,20 +1,14 @@
-import json
-
+from app.core.firestore import db
 from app.core.google_calendar import GoogleCalendar
+from app.modules.match.models.match import Match
 
 
 class CreateEventCommand:
     def __init__(self, match):
         self.match = match
-        self.matches_scheduled = None
 
     def execute(self):
         event = GoogleCalendar().create_event(match=self.match)
 
-        with open('matches_scheduled.json') as file:
-            self.matches_scheduled = json.load(file)
-
-        self.matches_scheduled[self.match.id] = {'event_id': event['id']}
-
-        with open('matches_scheduled.json', 'w') as file:
-            json.dump(self.matches_scheduled, file)
+        data = {'google_calendar_event_id': event['id'], 'match': self.match.dict()}
+        db.collection(Match.COLLECTION).document(str(self.match.id)).set(data)
