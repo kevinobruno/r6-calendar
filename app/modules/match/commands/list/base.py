@@ -26,6 +26,7 @@ class BaseListMatchesCommand:
             3,   # Copa da América do Sul
             5,   # Campeonato Mexicano
             8,   # Copa Elite Six da América
+            15,  # Copa do México
             17,  # Campeonato Sulamericano
         ],
         'EU': [

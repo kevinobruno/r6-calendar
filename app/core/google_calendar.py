@@ -8,11 +8,12 @@ from googleapiclient.discovery import build
 class GoogleCalendar:
 
     CALENDARS = {
-        'ASIA': '',
+        'ASIA': os.environ['ASIA_CALENDAR_ID'],
         'BR': os.environ['BR_CALENDAR_ID'],
-        'LATAM': '',
-        'EU': '',
+        'EU': os.environ['EU_CALENDAR_ID'],
         'GLOBAL': os.environ['GLOBAL_CALENDAR_ID'],
+        'LATAM': os.environ['LATAM_CALENDAR_ID'],
+        'NA': os.environ['NA_CALENDAR_ID'],
     }
 
     DEFAULT_TIMEZONE = 'America/Sao_Paulo'
