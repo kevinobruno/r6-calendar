@@ -1,3 +1,5 @@
+import logging
+
 from app.modules.event.commands.create import CreateEventCommand
 from app.modules.event.commands.find import FindEventCommand
 from app.modules.event.commands.update import UpdateEventCommand
@@ -19,15 +21,13 @@ def lambda_handler(event, context):
     matches.extend(ListMundialMatches().execute())
     matches.extend(ListNAMatches().execute())
 
-    print(f'{len(matches)} matches found')
+    logging.info(f'{len(matches)} matches found')
 
     for match in matches:
         event = FindEventCommand(match=match).execute()
 
         if event:
-            print(f'Match {match.summary} event already created, updating if needed...')
             UpdateEventCommand(match=match, event_id=event['google_calendar_event_id']).execute()
             continue
 
-        print(f'Creating event for match {match.summary} ...')
         CreateEventCommand(match=match).execute()
