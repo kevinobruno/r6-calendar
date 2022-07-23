@@ -80,3 +80,6 @@ app/grpc/js/*.js
 
 google_credentials.json
 .env-development
+
+python
+r6-calendar-*.zip
