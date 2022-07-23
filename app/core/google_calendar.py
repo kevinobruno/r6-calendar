@@ -1,6 +1,8 @@
 import json
 import os
 
+from app.core.parameter_store import ParameterStore
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
@@ -20,7 +22,8 @@ class GoogleCalendar:
     DEAFULT_TZ_INFO = '-03:00'
 
     def __init__(self):
-        credentials_info = json.loads(os.environ['GOOGLE_CREDENTIALS'])
+        parameter_store = ParameterStore()
+        credentials_info = json.loads(parameter_store.get(name='GOOGLE_CREDENTIALS'))
         credentials = service_account.Credentials.from_service_account_info(credentials_info)
         self.service = build('calendar', 'v3', credentials=credentials)
 
