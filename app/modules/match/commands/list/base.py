@@ -37,6 +37,7 @@ class BaseListMatchesCommand:
         ],
         'GLOBAL': [
             25,  # Six Major Charlotte
+            26,  # Six Major Berlin
         ],
     }
 
